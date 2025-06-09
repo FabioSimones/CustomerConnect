@@ -90,4 +90,14 @@ public class CustomerService {
             customer.get().setPhoneNumber(dto.phoneNumber());
         }
     }
+
+    public boolean deleteById(Long customerId) {
+        var exists = customerRepository.existsById(customerId);
+
+        if(exists){
+            customerRepository.deleteById(customerId);
+        }
+
+        return exists;
+    }
 }

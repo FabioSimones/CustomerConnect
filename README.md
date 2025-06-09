@@ -7,30 +7,40 @@
   Gerenciamento de Clientes que executa operações CRUD em uma entidade Cliente.</p>
   </br>
 
-  <h3>Regras de Negócio</h3>
-  <li>
-    <ul>Dados Cadastrais:</ul>
-    <li>
-      <ul>Precisamos das informações principais de nossos clientes: </ul>
-      <li>
-        <ul>Nome Completo</ul>
-        <ul>CPF</ul>
-        <ul>Email</ul>
-        <ul>Telefone Celular</ul>
-        <ul>Data de registro e atualização do cliente no sistema para fins de auditoria</ul>
-      </li>     
-    </li>
-     <li>
-        <ul>Cadastro único:</ul>
-       <li>
-         <ul>Temos que garantir que não teremos clientes com id ou cpf ou email repetido. </ul>
-       </li>
-    </li>
-    <li>
-      <ul>Busca flexível e personalizada</ul>
-      <li>
-        <ul>Permitir a paginação e ordenação de resultados</ul>
-        <ul>Permitir busca por CPF e/ou Email</ul>
-      </li>
-    </li>
-  </li>
+ Regras de Negócio
+Dados Cadastrais:
+Precisamos das informações principais de nossos clientes:
+Nome Completo
+CPF
+Email
+Telefone Celular
+Data de registro e atualização do cliente no sistema para fins de auditoria
+Cadastro único:
+Temos que garantir que não teremos clientes com id ou cpf ou email repetido. 
+Busca flexível e personalizada
+Permitir a paginação e ordenação de resultados
+Permitir busca por CPF e/ou Email
+Endpoint REST:
+POST /customers: Endpoint para receber o cadastro de clientes.
+Parâmetros requeridos:
+fullName: Nome completo
+cpf: CPF do cliente
+email: Email do cliente.
+phoneNumber: Telefone celular
+Retorna:
+customerId: Identificador do cliente no sistema.
+GET /customers: Endpoint para consultar o cadastro de clientes.
+Parâmetros de consulta:
+page: Numero da página
+pageSize: Quantidade de itens retornados por página
+orderBy: Ordenação de clientes pela data de criação
+email: Busca o cliente pelo email
+cpf: Busca o cliente pelo CPF
+Retorna:
+Dados do cliente e da paginação
+PUT /customers/{customerId}: Endpoint para atualizar um cliente.
+Parâmetros requeridos:
+fullName: Nome completo
+email: Email do cliente.
+phoneNumber: Telefone celular
+DELETE /customers/{customerId}: Endpoint para deletar um cliente do cadastro.

@@ -3,7 +3,11 @@ package dev.fabiosimones.customerconnect.service;
 import dev.fabiosimones.customerconnect.controller.dto.CreateCustomerDTO;
 import dev.fabiosimones.customerconnect.entity.CustomerEntity;
 import dev.fabiosimones.customerconnect.repository.CustomerRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 @Service
 public class CustomerService {
@@ -22,5 +26,34 @@ public class CustomerService {
         entity.setPhoneNumber(dto.phoneNumber());
 
         return customerRepository.save(entity);
+    }
+
+    public Page<CustomerEntity> findAll(Integer page, Integer pageSize, String orderBy,
+                                        String cpf, String email) {
+
+        var pageResquest = getPageRequest(page, pageSize, orderBy);
+        return findWithFilter(cpf, email, pageResquest);
+    }
+
+    private Page<CustomerEntity> findWithFilter(String cpf, String email, PageRequest pageResquest) {
+        if(StringUtils.hasText(cpf) && StringUtils.hasText(email)){
+            return customerRepository.findByCpfAndEmail(cpf, email, pageResquest);
+        }
+        if(StringUtils.hasText(cpf)){
+            return customerRepository.findByCpf(cpf, pageResquest);
+        }
+        if(StringUtils.hasText(email)){
+            return customerRepository.findByEmail(email, pageResquest);
+        }
+
+        return customerRepository.findAll(pageResquest);
+    }
+
+    private PageRequest getPageRequest(Integer page, Integer pageSize, String orderBy) {
+        var direction = Sort.Direction.DESC;
+        if(orderBy.equalsIgnoreCase("asc")){
+            direction = Sort.Direction.ASC;
+        }
+        return PageRequest.of(page, pageSize, direction, "createdAt");
     }
 }

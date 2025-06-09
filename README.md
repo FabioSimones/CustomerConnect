@@ -7,7 +7,7 @@
   Gerenciamento de Clientes que executa operações CRUD em uma entidade Cliente.</p>
   </br>
 
-##Regras de Negócio
+## Regras de Negócio
 <h3>Dados Cadastrais:</h3>
 <h4>Precisamos das informações principais de nossos clientes:</h4>
 <p>  --Nome Completo;</p>
@@ -22,7 +22,7 @@
 <p>  --Permitir busca por CPF e/ou Email.</p>
 </br>
 
-##Endpoint REST:
+## Endpoint REST:
 <h3>POST /customers: Endpoint para receber o cadastro de clientes.</h3>
 <h4>Parâmetros requeridos:</h4>
 <p>  --fullName: Nome completo.</p>
@@ -33,27 +33,24 @@
 <p>  --customerId: Identificador do cliente no sistema.</p>
 </br>
 
+<h3>GET /customers: Endpoint para consultar o cadastro de clientes.</h3>
+<h4>Parâmetros de consulta:</h4>
+<p>  --page: Numero da página;</p>
+<p>  --pageSize: Quantidade de itens retornados por página;</p>
+<p>  --orderBy: Ordenação de clientes pela data de criação;</p>
+<p>  --email: Busca o cliente pelo email;</p>
+<p>  --cpf: Busca o cliente pelo CPF.</p>
+<h4>Retorna:</h4>
+<p>  --Dados do cliente e da paginação.</p>
+</br>
+
+<h3>PUT /customers/{customerId}: Endpoint para atualizar um cliente.</h3>
+<h4>Parâmetros requeridos:</h4>
+<p>  --fullName: Nome completo;</p>
+<p>  --email: Email do cliente;</p>
+<p>  --phoneNumber: Telefone celular.</p>
+</br>
+
+<h3>DELETE /customers/{customerId}: Endpoint para deletar um cliente do cadastro.</h3>
 
 
-
-
-
-
-
-
-
-GET /customers: Endpoint para consultar o cadastro de clientes.
-Parâmetros de consulta:
-page: Numero da página
-pageSize: Quantidade de itens retornados por página
-orderBy: Ordenação de clientes pela data de criação
-email: Busca o cliente pelo email
-cpf: Busca o cliente pelo CPF
-Retorna:
-Dados do cliente e da paginação
-PUT /customers/{customerId}: Endpoint para atualizar um cliente.
-Parâmetros requeridos:
-fullName: Nome completo
-email: Email do cliente.
-phoneNumber: Telefone celular
-DELETE /customers/{customerId}: Endpoint para deletar um cliente do cadastro.

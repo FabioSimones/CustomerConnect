@@ -1,6 +1,7 @@
 package dev.fabiosimones.customerconnect.service;
 
 import dev.fabiosimones.customerconnect.controller.dto.CreateCustomerDTO;
+import dev.fabiosimones.customerconnect.controller.dto.UpdateCustomerDTO;
 import dev.fabiosimones.customerconnect.entity.CustomerEntity;
 import dev.fabiosimones.customerconnect.repository.CustomerRepository;
 import org.springframework.data.domain.Page;
@@ -62,5 +63,31 @@ public class CustomerService {
 
     public Optional<CustomerEntity> findById(Long customerId) {
         return customerRepository.findById(customerId);
+    }
+
+    public Optional<CustomerEntity> updateById(Long customerId, UpdateCustomerDTO dto) {
+        var customer = customerRepository.findById(customerId);
+
+        if (customer.isPresent()){
+            updateFields(dto, customer);
+
+            customerRepository.save(customer.get());
+        }
+
+        return customer;
+    }
+
+    private static void updateFields(UpdateCustomerDTO dto, Optional<CustomerEntity> customer) {
+        if(StringUtils.hasText(dto.fullName())){
+            customer.get().setFullName(dto.fullName());
+        }
+
+        if(StringUtils.hasText(dto.email())){
+            customer.get().setEmail(dto.email());
+        }
+
+        if(StringUtils.hasText(dto.phoneNumber())){
+            customer.get().setPhoneNumber(dto.phoneNumber());
+        }
     }
 }

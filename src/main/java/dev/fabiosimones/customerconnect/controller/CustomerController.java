@@ -3,6 +3,7 @@ package dev.fabiosimones.customerconnect.controller;
 import dev.fabiosimones.customerconnect.controller.dto.ApiResponse;
 import dev.fabiosimones.customerconnect.controller.dto.CreateCustomerDTO;
 import dev.fabiosimones.customerconnect.controller.dto.PaginationResponse;
+import dev.fabiosimones.customerconnect.controller.dto.UpdateCustomerDTO;
 import dev.fabiosimones.customerconnect.entity.CustomerEntity;
 import dev.fabiosimones.customerconnect.service.CustomerService;
 import org.springframework.http.ResponseEntity;
@@ -45,10 +46,20 @@ public class CustomerController {
 
     @GetMapping(path = "/{customerId}")
     public ResponseEntity<CustomerEntity> findById(@PathVariable("customerId") Long customerId){
-        var user = customerService.findById(customerId);
+        var customer = customerService.findById(customerId);
 
-        return user.isPresent() ?
-                ResponseEntity.ok(user.get()) : 
+        return customer.isPresent() ?
+                ResponseEntity.ok(customer.get()) :
+                ResponseEntity.notFound().build();
+    }
+
+    @PutMapping(path = "/{customerId}")
+    public ResponseEntity<CustomerEntity> updateById(@PathVariable("customerId") Long customerId,
+                                                     @RequestBody UpdateCustomerDTO dto){
+        var customer = customerService.updateById(customerId, dto);
+
+        return customer.isPresent() ?
+                ResponseEntity.noContent().build() :
                 ResponseEntity.notFound().build();
     }
 }

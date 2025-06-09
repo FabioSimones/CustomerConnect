@@ -7,28 +7,41 @@
   Gerenciamento de Clientes que executa operações CRUD em uma entidade Cliente.</p>
   </br>
 
- Regras de Negócio
-Dados Cadastrais:
-Precisamos das informações principais de nossos clientes:
-Nome Completo
-CPF
-Email
-Telefone Celular
-Data de registro e atualização do cliente no sistema para fins de auditoria
-Cadastro único:
-Temos que garantir que não teremos clientes com id ou cpf ou email repetido. 
-Busca flexível e personalizada
-Permitir a paginação e ordenação de resultados
-Permitir busca por CPF e/ou Email
-Endpoint REST:
-POST /customers: Endpoint para receber o cadastro de clientes.
-Parâmetros requeridos:
-fullName: Nome completo
-cpf: CPF do cliente
-email: Email do cliente.
-phoneNumber: Telefone celular
-Retorna:
-customerId: Identificador do cliente no sistema.
+##Regras de Negócio
+<h3>Dados Cadastrais:</h3>
+<h4>Precisamos das informações principais de nossos clientes:</h4>
+<p>  --Nome Completo;</p>
+<p>  --CPF;</p>
+<p>  --Email;</p>
+<p>  --Telefone Celular;</p>
+<p>  --Data de registro e atualização do cliente no sistema para fins de auditoria.</p>
+<h4>Cadastro único:</h4>
+<p>  --Temos que garantir que não teremos clientes com id ou cpf ou email repetido.</p>
+<h4>Busca flexível e personalizada</h4>
+<p>  --Permitir a paginação e ordenação de resultados;</p>
+<p>  --Permitir busca por CPF e/ou Email.</p>
+</br>
+
+##Endpoint REST:
+<h3>POST /customers: Endpoint para receber o cadastro de clientes.</h3>
+<h4>Parâmetros requeridos:</h4>
+<p>  --fullName: Nome completo.</p>
+<p>  --cpf: CPF do cliente.</p>
+<p>  --email: Email do cliente.</p> 
+<p>  --phoneNumber: Telefone celular.</p>
+<h4>Retorna:</h4>
+<p>  --customerId: Identificador do cliente no sistema.</p>
+</br>
+
+
+
+
+
+
+
+
+
+
 GET /customers: Endpoint para consultar o cadastro de clientes.
 Parâmetros de consulta:
 page: Numero da página

@@ -9,6 +9,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.swing.text.html.Option;
+import java.util.Optional;
+
 @Service
 public class CustomerService {
 
@@ -55,5 +58,9 @@ public class CustomerService {
             direction = Sort.Direction.ASC;
         }
         return PageRequest.of(page, pageSize, direction, "createdAt");
+    }
+
+    public Optional<CustomerEntity> findById(Long customerId) {
+        return customerRepository.findById(customerId);
     }
 }

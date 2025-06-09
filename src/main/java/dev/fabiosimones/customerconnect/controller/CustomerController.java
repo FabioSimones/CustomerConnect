@@ -42,4 +42,13 @@ public class CustomerController {
                 new PaginationResponse(pageResp.getNumber(), pageResp.getSize(), pageResp.getTotalElements(), pageResp.getTotalPages())
         ));
     }
+
+    @GetMapping(path = "/{customerId}")
+    public ResponseEntity<CustomerEntity> findById(@PathVariable("customerId") Long customerId){
+        var user = customerService.findById(customerId);
+
+        return user.isPresent() ?
+                ResponseEntity.ok(user.get()) : 
+                ResponseEntity.notFound().build();
+    }
 }
